@@ -9,8 +9,8 @@ function App() {
   };
   const greeting = (state = defaultState, action) => {
     switch (action.type) {
-      case "GREET_ME":
-        return { ...state, welcome: "Hello Holiday" };
+      case "GREET_NAME":
+        return { ...state, welcome: `Hello ${action.name}` };
       case "GREET_WORLD":
         return { ...state, welcome: "Hello World" };
       default:
@@ -20,7 +20,11 @@ function App() {
   const store = createStore(greeting);
   console.log(store, store.getState());
 
-  store.dispatch({ type: "GREET_WORLD" });
+  const name = "Holiday";
+  store.dispatch({ type: "GREET_NAME", name });
+  console.log(store.getState());
+
+  store.dispatch({ type: "GREET_NAME", name: "Lucky" });
   console.log(store.getState());
 
   return <div className="App">App</div>;
